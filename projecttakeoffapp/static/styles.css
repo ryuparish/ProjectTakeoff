@@ -138,8 +138,9 @@ main .form-control
   background-color: LightGrey;
   text-align: center;
   font-size: 4rem;
-  font-family: "Coiny";
   margin-bottom: auto;
+  font-family: "Coiny";
+  padding-bottom: 25px;
   animation: fadein 2s;
   -moz-animation: fadein 2s; /* Firefox */
   -webkit-animation: fadein 2s; /* Safari and Chrome */
@@ -150,11 +151,31 @@ main .form-control
   background-color: LightGrey;
 }
 
+.centered{
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 50%;
+  animation: fadein 2s;
+  -moz-animation: fadein 2s; /* Firefox */
+  -webkit-animation: fadein 2s; /* Safari and Chrome */
+  -o-animation: fadein 2s; /* Opera */
+}
+
 .premodded{
   margin-bottom: auto;
   margin-left: auto;
+  text-align: center;
   margin-right: auto;
+  width: auto;
+  font-size: 2rem;
+  overflow: hidden;
+  white-space: pre-wrap;
   font-family: "Coiny";
+  animation: fadein 2s;
+  -moz-animation: fadein 2s; /* Firefox */
+  -webkit-animation: fadein 2s; /* Safari and Chrome */
+  -o-animation: fadein 2s; /* Opera */
 }
 
 .paragraph{
