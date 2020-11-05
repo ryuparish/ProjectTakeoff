@@ -7,20 +7,20 @@ class User(UserMixin, db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(50))
     password = db.Column(db.String(100))
-    expert = db.Column(db.Boolean)
-    admin = db.Column(db.Boolean)
+    developer = db.Column(db.Boolean)
+    lead = db.Column(db.Boolean)
 
-    questions_asked = db.relationship(
-        'Question', 
-        foreign_keys='Question.asked_by_id', 
-        backref='asker', 
+    post = db.relationship(
+        'Post', 
+        foreign_keys='Post.posted_by_id', 
+        backref='poster', 
         lazy=True
     )
 
-    answers_requested = db.relationship(
-        'Question',
-        foreign_keys='Question.expert_id',
-        backref='expert',
+    comment = db.relationship(
+        'Post',
+        foreign_keys='Post.commenter_id',
+        backref='commenter',
         lazy=True
     )
 
@@ -32,9 +32,8 @@ class User(UserMixin, db.Model):
     def unhashed_password(self, unhashed_password):
         self.password = generate_password_hash(unhashed_password)
 
-class Question(db.Model):
+class Post(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    question = db.Column(db.Text)
-    answer = db.Column(db.Text)
-    asked_by_id = db.Column(db.Integer, db.ForeignKey('user.id'))
-    expert_id = db.Column(db.Integer, db.ForeignKey('user.id'))
+    post = db.Column(db.Text)
+    posted_by_id = db.Column(db.Integer, db.ForeignKey('user.id'))
+    commenter_id = db.Column(db.Text, db.ForeignKey('user.id'))
