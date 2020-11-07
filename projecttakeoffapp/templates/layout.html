@@ -32,11 +32,11 @@
             <div class="collapse navbar-collapse" id="navbar">
                     <ul class="navbar-nav mr-auto mt-2">
                       <!-- We should add specific special buttons to those who make an account -->
-                        <li class="nav-item"><a class="nav-link" href="/about">About</a></li>
-                        <li class="nav-item"><a class="nav-link" href="/projects">Projects</a></li>
-                        <li class="nav-item"><a class="nav-link" href="/join">Join</a></li>
-                        <li class="nav-item"><a class="nav-link" href="/videos">Videos</a></li>
-                        <li class="nav-item"><a class="nav-link" style="color:red;" href="/space">Scorpio</a></li>
+                        <li class="nav-item"><a class="nav-link" href="{{ url_for('main.about')}}">About</a></li>
+                        <li class="nav-item"><a class="nav-link" href="{{ url_for('main.projects')}}">Projects</a></li>
+                        <li class="nav-item"><a class="nav-link" href="{{ url_for('main.join')}}">Join</a></li>
+                        <li class="nav-item"><a class="nav-link" href="{{ url_for('main.videos')}}">Videos</a></li>
+                        <li class="nav-item"><a class="nav-link" style="color:red;" href="{{ url_for('station.space')}}">Scorpio</a></li>
                     </ul>
                     <ul class="navbar-nav ml-auto mt-2">
                         {% if current_user.is_authenticated %}
@@ -54,11 +54,35 @@
         </nav>
 
         {% if get_flashed_messages() %}
-            <header>
-                <div class="alert alert-primary border text-center" role="alert">
-                    {{ get_flashed_messages() | join(" ") }}
+        <main role="main" class="container">
+            <div class="row">
+              <div class="col-md-8">
+                {% with messages = get_flashed_messages(with_categories=true) %}
+                  {% if messages %}
+                    {% for category, message in messages %}
+                      <div class="alert alert-{{ category }}">
+                        {{ message }}
+                      </div>
+                    {% endfor %}
+                  {% endif %}
+                {% endwith %}
+                {% block content %}{% endblock %}
+              </div>
+              <div class="col-md-4">
+                <div class="content-section">
+                  <h3>Our Sidebar</h3>
+                  <p class='text-muted'>You can put any information here you'd like.
+                    <ul class="list-group">
+                      <li class="list-group-item list-group-item-light">Latest Posts</li>
+                      <li class="list-group-item list-group-item-light">Announcements</li>
+                      <li class="list-group-item list-group-item-light">Calendars</li>
+                      <li class="list-group-item list-group-item-light">etc</li>
+                    </ul>
+                  </p>
                 </div>
-            </header>
+              </div>
+            </div>
+          </main>
         {% endif %}
 
         {% block main %}

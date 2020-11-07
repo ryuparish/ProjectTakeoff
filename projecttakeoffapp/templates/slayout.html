@@ -31,14 +31,15 @@
             </button>
             <div class="collapse navbar-collapse" id="navbar">
                     <ul class="navbar-nav mr-auto mt-2">
-                        <li class="nav-item"><a class="nav-link" href="/asteroids">Asteroids</a></li>
-                        <li class="nav-item"><a class="nav-link" href="/astronauts">Astronauts</a></li>
-                        <li class="nav-item"><a class="nav-link" href="/posts">Post</a></li>
-                        <li class="nav-item"><a class="nav-link" style="color:red;" href="/space">Scorpio Space Station</a></li>
+                        <li class="nav-item"><a class="nav-link" href="{{ url_for('station.posts')}}">Posts</a></li>
+                        <li class="nav-item"><a class="nav-link" href="{{ url_for('station.account')}}">Account</a></li>
+                        <li class="nav-item"><a class="nav-link" href="{{ url_for('station.astronauts')}}">Astronauts</a></li>
+                        <li class="nav-item"><a class="nav-link" href="{{ url_for('station.new_post')}}">Post</a></li>
+                        <li class="nav-item"><a class="nav-link" style="color:red;" href="{{ url_for('station.space')}}">Scorpio Space Station</a></li>
                     </ul>
                     <ul class="navbar-nav ml-auto mt-2">
-                        <li class="nav-item"><a class="nav-link" href="/logout">Log Out</a></li>
-                        <li class="nav-item"><a class="nav-link" href="/index">Home</a></li>
+                        <li class="nav-item"><a class="nav-link" href="{{ url_for('auth.logout')}}">Log Out</a></li>
+                        <li class="nav-item"><a class="nav-link" href="{{ url_for('main.index')}}">Home</a></li>
                     </ul>
             </div>
         </nav>

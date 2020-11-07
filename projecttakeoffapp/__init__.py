@@ -1,4 +1,4 @@
-from flask import Flask 
+from flask import Flask, flash
 
 from .commands import create_tables
 from .extensions import db, login_manager
@@ -18,6 +18,8 @@ def create_app(config_file='settings.py'):
     login_manager.init_app(app)
 
     login_manager.login_view = 'auth.login'
+
+    login_manager.login_message_category = 'info'
 
     @login_manager.user_loader
     def load_user(user_id):
