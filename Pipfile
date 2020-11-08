@@ -11,6 +11,7 @@ flask-sqlalchemy = "*"
 flask-login = "*"
 python-dotenv = "*"
 flask-wtf = "*"
+flask-mail = "*"
 
 [requires]
 python_version = "3.9"

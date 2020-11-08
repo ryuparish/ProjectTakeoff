@@ -1,4 +1,4 @@
-from flask import render_template, request, Blueprint
+from flask import render_template, request, Blueprint, redirect, url_for, abort
 from projecttakeoffapp.models import Post
 from projecttakeoffapp.helpers import apology
 
@@ -20,9 +20,9 @@ def join():
 @main.route("/videos")
 def videos():
     #TODO
-    return apology("something")
+    abort(404)
 
 @main.route("/projects")
 def projects():
     #TODO
-    return apology("something")
+    abort(404)
