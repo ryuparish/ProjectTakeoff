@@ -1,13 +1,3 @@
-# OLD from flask import Flask, flash
-
-# OLD from .commands import create_tables
-# OLD from .extensions import db, login_manager
-# OLD from .models import User, Post
-# OLD from .routes.auth import auth
-# OLD from .routes.main import main
-# OLD from .routes.station import station
-
-
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 from flask_login import LoginManager
@@ -15,7 +5,7 @@ from projecttakeoffapp.config import Config
 
 db = SQLAlchemy()
 login_manager = LoginManager()
-login_manager.login_view = 'auth.login'
+login_manager.login_view = 'users.login'
 login_manager.login_message_category = 'info'
 
 def create_app(config_class=Config):

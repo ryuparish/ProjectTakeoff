@@ -1,17 +1,17 @@
 {% extends "slayout.html" %}
 
 {% block title %}
-    Welcome!
+    Users
 {% endblock %}
 {% block main %}
 <section class="astronautback">
     <section class="smallcontainer">
-        Hi!
+        Hello World!
     </section>
 </section>
-<section class = "greyback" style="padding-bottom: 200px;">
-    {% for user in astronauts %}
-        <h4 class="premodded">{{ user.name }}</h4>
+<section class = "greyback" style="height: 40vw;">
+    {% for user in users %}
+        <h4 class="premodded">{{ user.username }}</h4>
     {% endfor %}
 </section>
 {% endblock %}

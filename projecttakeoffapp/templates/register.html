@@ -11,7 +11,6 @@
                 <legend class="border-bottom mb-4">Join Today</legend>
                 <div class="form-group">
                     {{ form.username.label(class="form-control-label") }}
-
                     {% if form.username.errors %}
                         {{ form.username(class="form-control form-control-lg is-invalid") }}
                         <div class="invalid-feedback">
@@ -68,8 +67,8 @@
             </div>
         </form>
     </div>
-    <div class="border-top pt-3">
-        <small class="text-muted">
+    <div class="pt-3">
+        <small class="text-muted ml-3">
             Already Have An Account? <a class="ml-2" href="{{ url_for('users.login') }}">Sign In</a>
         </small>
     </div>

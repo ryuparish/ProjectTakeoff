@@ -23,13 +23,9 @@ def stream():
 @posts.route("/astronauts")
 @login_required
 def astronauts():
-    astronauts = User.query.all()
+    users = User.query.all()
 
-    context = {
-        'astronauts' : astronauts
-    }
-
-    return render_template('astronauts.html', **context)
+    return render_template('astronauts.html', users=users)
 
 
 @posts.route("/post/new", methods=['GET', 'POST'])
