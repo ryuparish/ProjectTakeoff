@@ -1,15 +1,12 @@
-from flask import Blueprint, render_template, request, flash, redirect, url_for
-from flask_login import current_user, login_required
-
-from projecttakeoffapp.extensions import db
-from projecttakeoffapp.models import Post, User
+from flask import render_template, request, Blueprint
+from projecttakeoffapp.models import Post
 from projecttakeoffapp.helpers import apology
 
 main = Blueprint('main', __name__)
 
+
 @main.route("/")
 def index():
-
     return render_template("index.html")
 
 @main.route("/about")
@@ -29,4 +26,3 @@ def videos():
 def projects():
     #TODO
     return apology("something")
-

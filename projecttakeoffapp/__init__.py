@@ -1,34 +1,35 @@
-from flask import Flask, flash
+# OLD from flask import Flask, flash
 
-from .commands import create_tables
-from .extensions import db, login_manager
-from .models import User, Post
-from .routes.auth import auth
-from .routes.main import main
-from .routes.station import station
+# OLD from .commands import create_tables
+# OLD from .extensions import db, login_manager
+# OLD from .models import User, Post
+# OLD from .routes.auth import auth
+# OLD from .routes.main import main
+# OLD from .routes.station import station
 
 
-def create_app(config_file='settings.py'):
+from flask import Flask
+from flask_sqlalchemy import SQLAlchemy
+from flask_login import LoginManager
+from projecttakeoffapp.config import Config
+
+db = SQLAlchemy()
+login_manager = LoginManager()
+login_manager.login_view = 'auth.login'
+login_manager.login_message_category = 'info'
+
+def create_app(config_class=Config):
     app = Flask(__name__)
-    
-    app.config.from_pyfile(config_file)
+    app.config.from_object(Config)
 
     db.init_app(app)
-
     login_manager.init_app(app)
 
-    login_manager.login_view = 'auth.login'
-
-    login_manager.login_message_category = 'info'
-
-    @login_manager.user_loader
-    def load_user(user_id):
-        return User.query.get(user_id)
-    
+    from projecttakeoffapp.users.routes import users
+    from projecttakeoffapp.posts.routes import posts
+    from projecttakeoffapp.main.routes import main
+    app.register_blueprint(users)
+    app.register_blueprint(posts)
     app.register_blueprint(main)
-    app.register_blueprint(auth)
-    app.register_blueprint(station)
-
-    app.cli.add_command(create_tables)
 
     return app
