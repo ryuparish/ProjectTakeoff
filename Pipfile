@@ -16,6 +16,7 @@ gunicorn = "*"
 psycopg2-binary = "*"
 heroku = "*"
 email-validator = "*"
+pillow = "*"
 
 [requires]
 python_version = "3.9"
