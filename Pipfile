@@ -12,6 +12,12 @@ flask-login = "*"
 python-dotenv = "*"
 flask-wtf = "*"
 flask-mail = "*"
+gunicorn = "*"
+psycopg2-binary = "*"
+heroku = "*"
+email-validator = "*"
+pillow = "*"
+flask-bcrypt = "*"
 
 [requires]
 python_version = "3.9"
