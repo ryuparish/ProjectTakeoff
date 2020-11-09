@@ -26,8 +26,3 @@ def videos():
 def projects():
     #TODO
     abort(404)
-
-@main.route("/projects/philpixel")
-def projects():
-    #Work In Progress will work on /projects next.
-    return render_template("philpixel.html")
