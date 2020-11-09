@@ -12,7 +12,9 @@ login_manager.login_message_category = 'info'
 mail = Mail()
 
 def create_app(config_class=Config):
+
     app = Flask(__name__)
+
     app.config.from_object(Config)
 
     db.init_app(app)
@@ -33,3 +35,5 @@ def create_app(config_class=Config):
 
 
     return app
+
+app = create_app()
