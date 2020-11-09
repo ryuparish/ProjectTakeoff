@@ -34,6 +34,9 @@
                     {% else %}
                         {{ form.email(class="form-control form-control-lg") }}
                     {% endif %}
+                    <div class="text-muted">
+                        This email will only be used for the token used to reset your password.
+                    </div>
                 </div>
                 <div class="form-group">
                     {{ form.password.label(class="form-control-label") }}
@@ -47,6 +50,9 @@
                     {% else %}
                         {{ form.password(class="form-control form-control-lg") }}
                     {% endif %}
+                    <div style="color: red">
+                        Please do not use any passwords that you may use in any other accounts, create a new one.
+                    </div
                 </div>
                 <div class="form-group">
                     {{ form.confirm_password.label(class="form-control-label") }}
@@ -69,7 +75,7 @@
     </div>
     <div class="pt-3">
         <small class="text-muted ml-3">
-            Already Have An Account? <a class="ml-2" href="{{ url_for('users.login') }}">Sign In</a>
+            Already Have An Account? <a class="ml-2" href="{{ url_for('users.login') }}">Log In</a>
         </small>
     </div>
 {% endblock %}

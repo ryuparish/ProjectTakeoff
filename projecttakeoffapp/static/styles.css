@@ -1,7 +1,7 @@
 nav .navbar-brand
 {
     /* size for brand */
-    font-size: xx-large;
+    font-size: xxx-large;
 }
 
 nav .navbar-brand .purple
@@ -68,6 +68,10 @@ a.article-title:hover {
   height: 65px;
   width: 65px;
   margin-right: 16px;
+}
+
+.navbar {
+  color: white;
 }
 
 .article-metadata {
