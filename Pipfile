@@ -15,6 +15,7 @@ flask-mail = "*"
 gunicorn = "*"
 psycopg2-binary = "*"
 heroku = "*"
+email-validator = "*"
 
 [requires]
 python_version = "3.9"
