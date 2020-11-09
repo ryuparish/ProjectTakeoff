@@ -1,0 +1,21 @@
+{% extends "layout.html" %}
+
+{% block scripts %}
+    <script src="{{ url_for('static', filename='javascript/testing.js')}}"></script>
+    <script src="{{ url_for('static', filename='javascript/philpixel.js')}}"></script>
+{% endblock %}
+
+{% block title %}
+    PhilPixel
+{% endblock %}
+
+{% block main %}
+    <script>PopUp('This was a test of getting Javascript to work!');</script>
+
+    <div style="margin: 0; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);">
+        <canvas id="displayCanvas" width="16" height="16" style="border:1px solid
+             black; image-rendering: pixelated; width: 400px; height: 300px;"></canvas>     
+    </div>
+    <script>DrawOnCanvas();</script>
+{% endblock %}
+
