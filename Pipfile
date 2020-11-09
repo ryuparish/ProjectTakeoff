@@ -12,6 +12,8 @@ flask-login = "*"
 python-dotenv = "*"
 flask-wtf = "*"
 flask-mail = "*"
+gunicorn = "*"
+psycopg2-binary = "*"
 
 [requires]
 python_version = "3.9"
