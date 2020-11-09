@@ -1,39 +1,47 @@
+from datetime import datetime
+from itsdangerous import TimedJSONWebSignatureSerializer as Serializer
+from flask import current_app
+from projecttakeoffapp import db, login_manager
 from flask_login import UserMixin
-from werkzeug.security import generate_password_hash
 
-from .extensions import db 
 
-class User(UserMixin, db.Model):
+@login_manager.user_loader
+def load_user(user_id):
+    return User.query.get(user_id)
+    
+
+class User(db.Model, UserMixin):
     id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String(50))
-    password = db.Column(db.String(100))
-    developer = db.Column(db.Boolean)
-    lead = db.Column(db.Boolean)
+    username = db.Column(db.String(20), unique=True, nullable=False)
+    email = db.Column(db.String(120), unique=True, nullable=False)
+    image_file = db.Column(db.String(20), nullable=False, default='default.jpg')
+    password = db.Column(db.String(60), nullable=False)
+    posts = db.relationship('Post', backref='author', lazy=True)
 
-    post = db.relationship(
-        'Post', 
-        foreign_keys='Post.posted_by_id', 
-        backref='poster', 
-        lazy=True
-    )
+    def get_reset_token(self, expires_sec=1800):
+        s = Serializer(current_app.config['SECRET_KEY'], expires_sec)
+        return s.dumps({'user_id': self.id}).decode('utf-8')
 
-    comment = db.relationship(
-        'Post',
-        foreign_keys='Post.commenter_id',
-        backref='commenter',
-        lazy=True
-    )
+    @staticmethod
+    def verify_reset_token(token):
+        s = Serializer(current_app.config['SECRET_KEY'])
+        try:
+            user_id = s.loads(token)['user_id']
+        except:
+            return None
+        return User.query.get(user_id)
 
-    @property
-    def unhashed_password(self):
-        raise AttributeError('Cannot view unhashed password!')
+    def __repr__(self):
+        return f"User('{self.username}', '{self.email}', '{self.image_file}')"
 
-    @unhashed_password.setter
-    def unhashed_password(self, unhashed_password):
-        self.password = generate_password_hash(unhashed_password)
 
 class Post(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    post = db.Column(db.Text)
-    posted_by_id = db.Column(db.Integer, db.ForeignKey('user.id'))
-    commenter_id = db.Column(db.Text, db.ForeignKey('user.id'))
+    title = db.Column(db.String(100), nullable=False)
+    date_posted = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
+    content = db.Column(db.Text, nullable=False)
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
+
+    def __repr__(self):
+        return f"Post('{self.title}', '{self.date_posted}')"
+

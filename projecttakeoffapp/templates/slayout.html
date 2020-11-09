@@ -14,6 +14,9 @@
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
         <link href="/static/styles.css" rel="stylesheet">
         <link href='https://fonts.googleapis.com/css?family=Coiny' rel='stylesheet'>
+        <link href="https://fonts.googleapis.com/css2?family=Rajdhani&family=Xanh+Mono&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css2?family=Turret+Road:wght@700&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css2?family=Abel&display=swap" rel="stylesheet">
 
         <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
@@ -23,34 +26,34 @@
     </head>
 
     <body>
-
-        <nav class="navbar navbar-expand-md navbar-light bg-light border">
-            <a class="navbar-brand" href="/"><span class="red">TCC NE CS Club</span></a>
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+            <a class="navbar-brand" href="/"><span class="red" style="font-family: 'Turret Road', cursive;">TCC NE CS Club</span></a>
             <button aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation" class="navbar-toggler" data-target="#navbar" data-toggle="collapse" type="button">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbar">
                     <ul class="navbar-nav mr-auto mt-2">
-                        <li class="nav-item"><a class="nav-link" href="/asteroids">Asteroids</a></li>
-                        <li class="nav-item"><a class="nav-link" href="/astronauts">Astronauts</a></li>
-                        <li class="nav-item"><a class="nav-link" href="/posts">Post</a></li>
-                        <li class="nav-item"><a class="nav-link" style="color:red;" href="/space">Scorpio Space Station</a></li>
+                        <li class="nav-item"><a class="nav-link" style="font-family: 'Turret Road', cursive; font-size: larger" href="{{ url_for('posts.stream')}}">Posts</a></li>
+                        <li class="nav-item"><a class="nav-link" style="font-family: 'Turret Road', cursive; font-size: larger" href="{{ url_for('users.account')}}">Account</a></li>
+                        <li class="nav-item"><a class="nav-link" style="font-family: 'Turret Road', cursive; font-size: larger" href="{{ url_for('posts.astronauts')}}">Astronauts</a></li>
+                        <li class="nav-item"><a class="nav-link" style="font-family: 'Turret Road', cursive; font-size: larger" href="{{ url_for('posts.new_post')}}">Post</a></li>
+                        <li class="nav-item"><a class="nav-link" style="color:red; font-family: 'Turret Road', cursive; font-size: larger" href="{{ url_for('posts.space')}}">SCORPIO SPACE STATION</a></li>
                     </ul>
                     <ul class="navbar-nav ml-auto mt-2">
-                        <li class="nav-item"><a class="nav-link" href="/logout">Log Out</a></li>
-                        <li class="nav-item"><a class="nav-link" href="/index">Home</a></li>
+                        <li class="nav-item"><a class="nav-link" style="font-family: 'Turret Road', cursive;" href="{{ url_for('users.logout')}}">Log Out</a></li>
+                        <li class="nav-item"><a class="nav-link" style="font-family: 'Turret Road', cursive;" href="{{ url_for('main.index')}}">Home</a></li>
                     </ul>
             </div>
         </nav>
-
-        {% if get_flashed_messages() %}
-            <header>
-                <div class="alert alert-primary border text-center" role="alert">
-                    {{ get_flashed_messages() | join(" ") }}
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+              {% for category, message in messages %}
+                <div class="alert alert-{{ category }}">
+                  {{ message }}
                 </div>
-            </header>
-        {% endif %}
-
+              {% endfor %}
+            {% endif %}
+          {% endwith %}
         {% block main %}
         {% endblock %}
     </body>

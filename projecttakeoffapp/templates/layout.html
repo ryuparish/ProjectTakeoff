@@ -14,6 +14,7 @@
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
         <link href="/static/styles.css" rel="stylesheet">
         <link href='https://fonts.googleapis.com/css?family=Coiny' rel='stylesheet'>
+        <link href="https://fonts.googleapis.com/css2?family=Turret+Road:wght@700&display=swap" rel="stylesheet">
 
         <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
@@ -23,8 +24,7 @@
     </head>
 
     <body>
-
-        <nav class="navbar navbar-expand-md navbar-light bg-light border">
+        <nav class="navbar navbar-expand-md navbar-light bg-light">
             <a class="navbar-brand" href="/"><span class="purple">TCC NE CS Club</span></a>
             <button aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation" class="navbar-toggler" data-target="#navbar" data-toggle="collapse" type="button">
                 <span class="navbar-toggler-icon"></span>
@@ -32,11 +32,11 @@
             <div class="collapse navbar-collapse" id="navbar">
                     <ul class="navbar-nav mr-auto mt-2">
                       <!-- We should add specific special buttons to those who make an account -->
-                        <li class="nav-item"><a class="nav-link" href="/about">About</a></li>
-                        <li class="nav-item"><a class="nav-link" href="/projects">Projects</a></li>
-                        <li class="nav-item"><a class="nav-link" href="/join">Join</a></li>
-                        <li class="nav-item"><a class="nav-link" href="/videos">Videos</a></li>
-                        <li class="nav-item"><a class="nav-link" style="color:red;" href="/space">Scorpio</a></li>
+                        <li class="nav-item"><a class="nav-link" href="{{ url_for('main.about')}}">About</a></li>
+                        <li class="nav-item"><a class="nav-link" href="{{ url_for('main.projects')}}">Projects</a></li>
+                        <li class="nav-item"><a class="nav-link" href="{{ url_for('main.join')}}">Join</a></li>
+                        <li class="nav-item"><a class="nav-link" href="{{ url_for('main.videos')}}">Videos</a></li>
+                        <li class="nav-item"><a class="nav-link" style="color:red; font-family: 'Turret Road', cursive; font-size: larger" href="{{ url_for('posts.space')}}">SCORPIO</a></li>
                     </ul>
                     <ul class="navbar-nav ml-auto mt-2">
                         {% if current_user.is_authenticated %}
@@ -52,17 +52,16 @@
                     </ul>
             </div>
         </nav>
-
-        {% if get_flashed_messages() %}
-            <header>
-                <div class="alert alert-primary border text-center" role="alert">
-                    {{ get_flashed_messages() | join(" ") }}
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+              {% for category, message in messages %}
+                <div class="alert alert-{{ category }}">
+                  {{ message }}
                 </div>
-            </header>
-        {% endif %}
-
+              {% endfor %}
+            {% endif %}
+          {% endwith %}
         {% block main %}
         {% endblock %}
     </body>
-
 </html>

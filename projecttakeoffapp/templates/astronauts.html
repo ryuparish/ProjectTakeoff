@@ -1,17 +1,25 @@
 {% extends "slayout.html" %}
 
 {% block title %}
-    Welcome!
+    Users
 {% endblock %}
 {% block main %}
 <section class="astronautback">
     <section class="smallcontainer">
-        Hi!
+        Hello World!
     </section>
 </section>
-<section class = "greyback" style="padding-bottom: 200px;">
-    {% for user in astronauts %}
-        <h4 class="premodded">{{ user.name }}</h4>
+<section class = "greyback" style="height: 40vw;">
+    {% for user in users %}
+        <article class="media content-section">
+          <img class="rounded-circle article-img" src="{{ url_for('static', filename='profile_pics/' + user.image_file) }}">
+          <div class="media-body">
+            <div class="article-metadata">
+              <a class="mr-2" style="color: red" href="{{ url_for('posts.user_posts', username=user.username) }}">{{ user.username }}</a>
+            </div>
+            <h2><a class="article-title" href="{{ url_for('posts.user_posts', username=user.username) }}">User</a></h2>
+          </div>
+        </article>
     {% endfor %}
 </section>
 {% endblock %}
