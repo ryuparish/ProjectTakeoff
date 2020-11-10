@@ -2,7 +2,6 @@
 
 {% block scripts %}
     <script src="{{ url_for('static', filename='javascript/testing.js')}}"></script>
-    <script src="{{ url_for('static', filename='javascript/philpixel.js')}}"></script>
 {% endblock %}
 
 {% block title %}
@@ -12,10 +11,19 @@
 {% block main %}
     <script>PopUp('This was a test of getting Javascript to work!');</script>
 
-    <div style="margin: 0; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);">
-        <canvas id="displayCanvas" width="16" height="16" style="border:1px solid
-             black; image-rendering: pixelated; width: 400px; height: 300px;"></canvas>     
+    <div style="margin: 0; position: absolute; top: 20%; left: 50%; transform: translate(-50%, -50%);">
+        Red:<input type="range" min="0" max="255" value="0" class="slider" id="myRange">
+        Blue:<input type="range" min="0" max="255" value="0" class="slider" id="myRange">  
+        Green:<input type="range" min="0" max="255" value="0" class="slider" id="myRange">    
+        Alpha:<input type="range" min="0" max="255" value="0" class="slider" id="myRange">    
     </div>
-    <script>DrawOnCanvas();</script>
+    <div style="margin: 0; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);">
+        <canvas id="displayCanvas" width="400" height="300"></canvas>     
+    </div>
+
+    <script src="{{ url_for('static', filename='javascript/philpixel.js')}}"></script>
+
+    <script>Initialize();</script>
+    
 {% endblock %}
 
