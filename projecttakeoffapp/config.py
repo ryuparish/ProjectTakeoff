@@ -8,4 +8,4 @@ class Config:
     MAIL_PORT = 587
     MAIL_USE_TLS = True
     MAIL_USERNAME = "tccnecs@gmail.com"
-    MAIL_PASSWORD = "CSCLUB2020"
+    MAIL_PASSWORD = "bygeltvpetxipnuj"
