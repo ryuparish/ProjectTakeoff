@@ -27,6 +27,7 @@ def projects():
     #TODO
     abort(404)
 
-@main.route("/projects/philpixel")
+@main.route("/projects/philpixel", methods=['GET', 'POST'])
 def pixel():
-    render_template("philpixel.html")
+
+    return render_template("philpixel.html")
