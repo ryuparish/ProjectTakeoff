@@ -26,3 +26,7 @@ def videos():
 def projects():
     #TODO
     abort(404)
+
+@main.route("/projects/philpixel")
+def pixel():
+    render_template("philpixel.html")
