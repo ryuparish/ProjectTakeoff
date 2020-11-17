@@ -14,10 +14,12 @@ flask-wtf = "*"
 flask-mail = "*"
 gunicorn = "*"
 psycopg2-binary = "*"
-heroku = "*"
 email-validator = "*"
 pillow = "*"
 flask-bcrypt = "*"
+awscli = "*"
+heroku3 = "*"
+boto3 = "*"
 
 [requires]
 python_version = "3.9"

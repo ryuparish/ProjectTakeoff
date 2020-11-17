@@ -4,20 +4,17 @@ from PIL import Image
 from flask import url_for, current_app
 from flask_mail import Message
 from projecttakeoffapp import mail
+from projecttakeoffapp.helpers import *
 
 
-def save_picture(form_picture):
-    random_hex = secrets.token_hex(8)
-    _, f_ext = os.path.splitext(form_picture.filename)
-    picture_fn = random_hex + f_ext
-    picture_path = os.path.join('projecttakeoffapp/static/profile_pics', picture_fn)
-
-    output_size = (125, 125)
-    i = Image.open(form_picture)
-    i.thumbnail(output_size)
-    i.save(picture_path)
-
-    return picture_fn
+def save_picture(form_picture, bucket_name, acl="public-read"):
+    try:
+        s3.upload_fileobj(form_picture.data, bucket_name, form_picture.data.filename, ExtraArgs={"ACL": acl, "ContentType": form_picture.data.content_type})
+    except Exception as e:
+        print("Something Happened: ", e)
+        print(S3_KEY)
+        return e
+    return "{}{}".format(S3_LOCATION, form_picture.data.filename)
 
 def send_reset_email(user):
     token = user.get_reset_token()
@@ -26,7 +23,7 @@ def send_reset_email(user):
                   recipients=[user.email])
     msg.body = f'''Hello CS Club Member,
     
-    To reset your password, visit the following link:
+To reset your password, visit the following link:
 {url_for('users.reset_token', token=token, _external=True)}
 If you did not make this request then simply ignore this email and no changes will be made.
 '''

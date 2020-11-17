@@ -4,6 +4,7 @@ from projecttakeoffapp import db, bcrypt
 from projecttakeoffapp.models import User, Post
 from projecttakeoffapp.users.forms import RegistrationForm, LoginForm, UpdateAccountForm, RequestResetForm, ResetPasswordForm
 from projecttakeoffapp.users.utils import save_picture, send_reset_email
+from projecttakeoffapp.helpers import S3_BUCKET
 
 
 users = Blueprint('users', __name__)
@@ -49,7 +50,7 @@ def account():
     form = UpdateAccountForm()
     if form.validate_on_submit():
         if form.picture.data:
-            picture_file = save_picture(form.picture.data)
+            picture_file = save_picture(form.picture, S3_BUCKET)
             current_user.image_file = picture_file
         current_user.username = form.username.data
         current_user.email = form.email.data
@@ -59,7 +60,7 @@ def account():
     elif request.method == 'GET':
         form.username.data = current_user.username
         form.email.data = current_user.email
-    image_file = url_for('static', filename='profile_pics/' + current_user.image_file)
+    image_file = current_user.image_file
     return render_template('account.html', image_file=image_file, form=form)
 
 @users.route("/reset_password", methods=['GET', 'POST'])

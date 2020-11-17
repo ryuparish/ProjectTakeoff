@@ -12,7 +12,7 @@
 <section class = "greyback" style="height: 40vw;">
     {% for user in users %}
         <article class="media content-section">
-          <img class="rounded-circle article-img" src="{{ url_for('static', filename='profile_pics/' + user.image_file) }}">
+          <img class="rounded-circle article-img" src="{{ user.image_file }}">
           <div class="media-body">
             <div class="article-metadata">
               <a class="mr-2" style="color: red" href="{{ url_for('posts.user_posts', username=user.username) }}">{{ user.username }}</a>

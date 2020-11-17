@@ -7,6 +7,10 @@
 .AppleDouble
 .LSOverride
 
+# environment variables via dotenv
+.env
+
+
 # Icon must end with two \r
 Icon
 

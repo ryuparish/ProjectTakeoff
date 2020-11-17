@@ -3,7 +3,14 @@ import requests
 import urllib.parse
 
 from flask import redirect, render_template, request
+import boto3, botocore
+from projecttakeoffapp.config import S3_KEY, S3_SECRET, S3_BUCKET, S3_LOCATION
 
+s3 = boto3.client(
+   "s3",
+   aws_access_key_id=S3_KEY,
+   aws_secret_access_key=S3_SECRET
+)
 
 def apology(message, code=400):
     """Render message as an apology to user."""
