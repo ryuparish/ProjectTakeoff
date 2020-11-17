@@ -3,7 +3,7 @@
     <h1 class="mb-3 ml-2 mt-2">Everything posted by {{ user.username }} ({{ posts.total }} total posts)</h1>
     {% for post in posts.items %}
         <article class="media content-section">
-          <img class="rounded-circle article-img" src="{{ url_for('static', filename='profile_pics/' + post.author.image_file) }}">
+          <img class="rounded-circle article-img" src="{{ post.author.image_file }}">
           <div class="media-body">
             <div class="article-metadata">
               <a class="mr-2" style="color: red;" href="{{ url_for('posts.user_posts', username=post.author.username) }}">{{ post.author.username }}</a>
