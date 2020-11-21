@@ -19,8 +19,7 @@ def join():
 
 @main.route("/videos")
 def videos():
-    #TODO
-    abort(404)
+    return render_template("videos.html")
 
 @main.route("/projects")
 def projects():
